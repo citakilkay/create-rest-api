@@ -1,8 +1,11 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+require('dotenv/config');
+//.env push edilmez
 
-mongoose.connect('mongodb://localhost/rest_db',{
+// Connect DB
+mongoose.connect(process.env.DB_CONNECTION,{
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
@@ -12,8 +15,11 @@ mongoose.connect('mongodb://localhost/rest_db',{
 //Middlewares --> her sayfaya giderken authentication kontrol edilir app.use ile bu bir middlewaredir.
 //app.use(auth);
 
-//ROUTES
+//Import Routes
+const postsRoute = require('./routes/posts');
+app.use('/posts', postsrouters);
 
+//ROUTES
 app.get('/', (req, res) => {
     res.send('This is Our Home');
 });
