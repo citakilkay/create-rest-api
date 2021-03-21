@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+const { route } = require('./routes/posts');
 require('dotenv/config');
 //.env push edilmez
 
@@ -17,7 +18,7 @@ mongoose.connect(process.env.DB_CONNECTION,{
 
 //Import Routes
 const postsRoute = require('./routes/posts');
-app.use('/posts', postsrouters);
+app.use('/posts', postsRoute); // this is a middleware
 
 //ROUTES
 app.get('/', (req, res) => {
