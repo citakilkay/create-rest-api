@@ -1,7 +1,7 @@
+const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-const { route } = require('./routes/posts');
 require('dotenv/config');
 //.env push edilmez
 
@@ -12,6 +12,8 @@ mongoose.connect(process.env.DB_CONNECTION,{
     useFindAndModify: false,
     useCreateIndex: true
 });
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 //Middlewares --> her sayfaya giderken authentication kontrol edilir app.use ile bu bir middlewaredir.
 //app.use(auth);
